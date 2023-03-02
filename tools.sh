@@ -19,7 +19,7 @@ ___________           .__
 
 # Check if the tools directory exists, and create it if it doesn't
 if [ ! -d "$TOOLS_DIR" ]; then
-    echo -e "\e[1;92mCreating tools directory...\e[0m"
+    echo -e "$green Creating tools directory...\e[0m"
     mkdir "$TOOLS_DIR"
 else
     echo -e "$yellow tools Directory Is Already Created\e[0m"
@@ -29,15 +29,18 @@ fi
 cd "$TOOLS_DIR"
 
 ################## Apt ##################
-echo -e "$green  Updating...\e[0m"
-sudo apt -qq update -y && sudo apt -qq upgrade -y
+echo -e " $ Update your system with \e[1;93msudo apt update -y && sudo apt upgrade -y\e[0m before using this tool."
+echo -e "$green  Working...\e[0m"
+sudo apt install python3-venv -y >/dev/null 2>&1
+python3 -m venv myenv
+source myenv/bin/activate
 
 # subfinder
 if command -v subfinder &> /dev/null; then
     echo -e "$green subfinder: $yellow installed\e[0m"
 else
     echo -e "$green subfinder: $red installing..\e[0m"
-    sudo apt install subfinder >/dev/null 2>&1
+    sudo apt install subfinder -y >/dev/null 2>&1
 fi
 
 # sublist3r
@@ -45,7 +48,7 @@ if command -v sublist3r &> /dev/null; then
     echo -e "$green sublist3r: $yellow installed\e[0m"
 else
     echo -e "$green sublist3r: $red installing..\e[0m"
-    sudo apt install sublist3r >/dev/null 2>&1
+    sudo apt install sublist3r -y >/dev/null 2>&1
 fi
 
 # dirsearch
@@ -53,7 +56,7 @@ if command -v dirsearch &> /dev/null; then
     echo -e "$green dirsearch: $yellow installed\e[0m"
 else
     echo -e "$green dirsearch: $red installing..\e[0m"
-    sudo apt install dirsearch >/dev/null 2>&1
+    sudo apt install dirsearch -y >/dev/null 2>&1
 fi
 
 # Amass
@@ -61,7 +64,16 @@ if command -v amass &> /dev/null; then
     echo -e "$green amass: $yellow installed\e[0m"
 else
     echo -e "$green amass: $red installing..\e[0m"
-    sudo apt install amass >/dev/null 2>&1
+    sudo apt install amass -y >/dev/null 2>&1
+fi
+
+##################### pip #####################
+# xsstrike
+if command -v xsstrike &> /dev/null; then
+    echo -e "$green xsstrike: $yellow installed\e[0m"
+else
+    echo -e "$green xsstrike: $red installing..\e[0m"
+    pip3 install xsstrike >/dev/null 2>&1
 fi
 
 ################## github.com ##################
@@ -72,6 +84,17 @@ if [ ! -d "Breacher" ]; then
 else
     echo -e "$green Breacher: $yellow Found. Updating...\e[0m"
     cd "Breacher"
+    git pull >/dev/null 2>&1
+    cd ..
+fi
+
+# PwnXSS
+if [ ! -d "PwnXSS" ]; then
+    echo -e "$green PwnXSS: $red Not Found\e[0m"
+    git clone https://github.com/pwn0sec/PwnXSS.git >/dev/null 2>&1
+else
+    echo -e "$green PwnXSS: $yellow Found. Updating...\e[0m"
+    cd "PwnXSS"
     git pull >/dev/null 2>&1
     cd ..
 fi
