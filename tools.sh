@@ -17,7 +17,11 @@ ___________           .__
 
 """
 
-# Check if the tools directory exists, and create it if it doesn't
+# Check if the directory exists, and if not, create it
+if [ ! -d "$HOME/Desktop" ]; then
+    mkdir "$HOME/Desktop"
+fi
+
 if [ ! -d "$TOOLS_DIR" ]; then
     echo -e "$green Creating tools directory...\e[0m"
     mkdir "$TOOLS_DIR"
@@ -175,4 +179,5 @@ echo -e "$green anew: $yellow Done"
 go install -v github.com/tomnomnom/anew@latest >/dev/null 2>&1
 
 ################## Finished ##################
-echo -e "\n\e[1;92m   Finished!!!\e[0m"
+echo -e "\n\e[1;92m   Installation Complete\e[0m"
+echo "   tools installed in \e[1;94m$HOME/Desktop/tools\e[0m Directory."
