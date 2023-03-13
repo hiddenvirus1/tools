@@ -18,10 +18,6 @@ ___________           .__
 """
 
 # Check if the directory exists, and if not, create it
-if [ ! -d "$HOME/Desktop" ]; then
-    mkdir "$HOME/Desktop"
-fi
-
 if [ ! -d "$TOOLS_DIR" ]; then
     echo -e "$green Creating tools directory...\e[0m"
     mkdir "$TOOLS_DIR"
@@ -37,7 +33,19 @@ echo -e " $ Update your system with \e[1;93msudo apt update -y && sudo apt upgra
 echo -e "$green  Working...\e[0m"
 sudo apt install python3-venv -y >/dev/null 2>&1
 python3 -m venv myenv
-source myenv/bin/activate
+echo "source ~/Desktop/tools/myenv/bin/activate" >> ~/.profile
+echo 'export GOPATH=$HOME/go\nexport PATH=$PATH:$GOPATH/bin\nexport PATH=$PATH:$GOPATH/bin:/usr/local/go/bin' >> ~/.profile
+echo "source ~/.profile" >> ~/.zshrc
+echo "source ~/.profile" >> ~/.bashrc
+source ~/.profile
+
+# golang
+if command -v go &> /dev/null; then
+    echo -e "$green golang: $yellow installed\e[0m"
+else
+    echo -e "$green golang: $red installing..\e[0m"
+    sudo apt install golang -y >/dev/null 2>&1
+fi
 
 # subfinder
 if command -v subfinder &> /dev/null; then
@@ -105,7 +113,7 @@ fi
 
 # gmapsapiscanner
 if [ ! -d "gmapsapiscanner" ]; then
-    echo -e "$green gmapsapiscanner: is $red Not Found\e[0m"
+    echo -e "$green gmapsapiscanner: $red Not Found\e[0m"
     git clone https://github.com/ozguralp/gmapsapiscanner.git >/dev/null 2>&1
 else
     echo -e "$green gmapsapiscanner: $yellow Found. Updating...\e[0m"
@@ -158,6 +166,17 @@ else
     cd ..
 fi
 
+# wordlist
+if [ ! -d "WordLists-20111129" ]; then
+    echo -e "$green WordLists-20111129: $red Not Found\e[0m"
+    git clone https://github.com/emadshanab/WordLists-20111129.git >/dev/null 2>&1
+else
+    echo -e "$green WordLists-20111129: $yellow Found. Updating...\e[0m"
+    cd "WordLists-20111129"
+    git pull >/dev/null 2>&1
+    cd ..
+fi
+
 ################## golang ##################
 echo -e "$green httpx: $yellow Done"
 go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest >/dev/null 2>&1
@@ -179,5 +198,5 @@ echo -e "$green anew: $yellow Done"
 go install -v github.com/tomnomnom/anew@latest >/dev/null 2>&1
 
 ################## Finished ##################
-echo -e "\n\e[1;92m   Installation Complete\e[0m"
-echo "   tools installed in \e[1;94m$HOME/Desktop/tools\e[0m Directory."
+echo -e "\n\e[1;92m [✔] Installation Complete\e[0m"
+echo -e " Tools installed in \e[1;94m$HOME/Desktop/tools\e[0m Directory"
