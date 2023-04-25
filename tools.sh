@@ -33,11 +33,6 @@ echo -e " $ Update your system with \e[1;93msudo apt update -y && sudo apt upgra
 echo -e "$green  Working...\e[0m"
 sudo apt install python3-venv -y >/dev/null 2>&1
 python3 -m venv myenv
-echo "source ~/Desktop/tools/myenv/bin/activate" >> ~/.profile
-echo 'export GOPATH=$HOME/go\nexport PATH=$PATH:$GOPATH/bin\nexport PATH=$PATH:$GOPATH/bin:/usr/local/go/bin' >> ~/.profile
-echo "source ~/.profile" >> ~/.zshrc
-echo "source ~/.profile" >> ~/.bashrc
-source ~/.profile
 
 # golang
 if command -v go &> /dev/null; then
@@ -196,6 +191,13 @@ echo -e "$green qsreplace: $yellow Done"
 go install github.com/tomnomnom/qsreplace@latest >/dev/null 2>&1
 echo -e "$green anew: $yellow Done"
 go install -v github.com/tomnomnom/anew@latest >/dev/null 2>&1
+
+################## configuration ##################
+echo "source ~/Desktop/tools/myenv/bin/activate" >> ~/.profile
+echo 'export GOPATH=$HOME/go\nexport PATH=$PATH:$GOPATH/bin\nexport PATH=$PATH:$GOPATH/bin:/usr/local/go/bin' >> ~/.profile
+echo "source ~/.profile" >> ~/.zshrc
+echo "source ~/.profile" >> ~/.bashrc
+source ~/.profile
 
 ################## Finished ##################
 echo -e "\n\e[1;92m [✔] Installation Complete\e[0m"
