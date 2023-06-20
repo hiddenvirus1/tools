@@ -20,7 +20,8 @@ ___________           .__
 # Check if the directory exists, and if not, create it
 if [ ! -d "$TOOLS_DIR" ]; then
     echo -e "$green Creating tools directory...\e[0m"
-    mkdir "$TOOLS_DIR"
+    mkdir "~/Desktop"
+    mkdir "~/Desktop/tools"
 else
     echo -e "$yellow tools Directory Is Already Created\e[0m"
 fi
