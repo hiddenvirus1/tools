@@ -118,7 +118,7 @@ else
     cd ..
 fi
 
-# bypass-403
+# bypasser
 if [ ! -d "bypasser" ]; then
     echo -e "$green bypasser: $red Installing\e[0m"
     git clone https://github.com/hiddenvirus1/bypasser.git >/dev/null 2>&1
