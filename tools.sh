@@ -119,12 +119,12 @@ else
 fi
 
 # bypass-403
-if [ ! -d "bypass-403" ]; then
-    echo -e "$green bypass-403: $red Installing\e[0m"
-    git clone https://github.com/iamj0ker/bypass-403.git >/dev/null 2>&1
+if [ ! -d "bypasser" ]; then
+    echo -e "$green bypasser: $red Installing\e[0m"
+    git clone https://github.com/hiddenvirus1/bypasser.git >/dev/null 2>&1
 else
-    echo -e "$green bypass-403: $yellow Installed. Updating...\e[0m"
-    cd "bypass-403"
+    echo -e "$green bypasser: $yellow Installed. Updating...\e[0m"
+    cd "bypasser"
     git pull >/dev/null 2>&1
     cd ..
 fi
@@ -164,7 +164,7 @@ fi
 
 # wordlist
 if [ ! -d "SecLists" ]; then
-    echo -e "$green WordLists-20111129: $red Installing\e[0m"
+    echo -e "$green SecLists: $red Installing\e[0m"
     git clone https://github.com/danielmiessler/SecLists.git >/dev/null 2>&1
 else
     echo -e "$green SecLists: $yellow Installed. Updating...\e[0m"
