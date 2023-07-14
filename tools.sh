@@ -32,8 +32,8 @@ cd "$TOOLS_DIR"
 ################## Apt ##################
 echo -e " $ Update your system with \e[1;93msudo apt update -y && sudo apt upgrade -y\e[0m before using this tool."
 echo -e "$green  Working...\e[0m"
-sudo apt install python3-venv -y >/dev/null 2>&1
-python3 -m venv myenv
+#sudo apt install python3-venv -y >/dev/null 2>&1
+#python3 -m venv myenv
 
 # golang
 if command -v go &> /dev/null; then
@@ -194,7 +194,7 @@ echo -e "$green anew: $yellow Done"
 go install -v github.com/tomnomnom/anew@latest >/dev/null 2>&1
 
 ################## configuration ##################
-echo "source ~/Desktop/tools/myenv/bin/activate" >> ~/.profile
+#echo "source ~/Desktop/tools/myenv/bin/activate" >> ~/.profile
 echo 'export GOPATH=$HOME/go\nexport PATH=$PATH:$GOPATH/bin\nexport PATH=$PATH:$GOPATH/bin:/usr/local/go/bin' >> ~/.profile
 echo "source ~/.profile" >> ~/.zshrc
 echo "source ~/.profile" >> ~/.bashrc
